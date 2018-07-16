@@ -144,7 +144,7 @@ class prescription_drug_class(object):
             for row in reversed(self.full_list):  wr.writerow(row)
 
 
-   def WriteDrugCountAndTotalDict(self, outFileName, reverse=False, deimals=False):
+   def WriteDrugCountAndTotalDict(self, outFileName, reverse=False, decimals=False):
       """
       Writes out the drug_totals_dict to a file specified. To loop
       backwards, then enable the boolean option.
@@ -154,15 +154,15 @@ class prescription_drug_class(object):
          wr.writerow(["drug_name","num_prescriber","total_cost"])
          if not reverse:
             for k,v in self.drug_totals_dict.items():          
-               if deimals: wr.writerow( (str(k.replace("__"," ")), v[0], "{0:.2f}".format(v[1])) )
+               if decimals: wr.writerow( (str(k.replace("__"," ")), v[0], "{0:.2f}".format(v[1])) )
                else:       wr.writerow( (str(k.replace("__"," ")), v[0], v[1] ) )
          else:
             for k,v in reverse(self.drug_totals_dict.items()): 
-               if deimals: wr.writerow( (str(k.replace("__"," ")), v[0], "{0:.2f}".format(v[1])) )
+               if decimals: wr.writerow( (str(k.replace("__"," ")), v[0], "{0:.2f}".format(v[1])) )
                else:       wr.writerow( (str(k.replace("__"," ")), v[0], v[1] ) )
   
 
-   def WriteDrugCountAndTotalList(self, outFileName, reverse=False, deimals=False):
+   def WriteDrugCountAndTotalList(self, outFileName, reverse=False, decimals=False):
       """
       Writes out the drug_totals_list to a file specified. To loop
       backwards, then enable the boolean option.
