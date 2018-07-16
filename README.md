@@ -58,6 +58,12 @@ TIME: 367.963036775589
 To execute this scrip, just run the "./run_tests.sh" command in the "insight_testsuite/" directory. 
 I was uncertain on where to point the input and output file locations to, but when investigating the above testing script, I noticed where it looked and pointed my scripts to read and write to "insight_testsuite/input/" and "insight_testsuite/output/", respectively.
 This enabled the test to run correctly. 
+Additionally, I have included several options, including how the output is formatted. 
+The most important one is the "decimals" option when saving. 
+The "test_1" dataset has only integers, but the larger dataset provided uses floats for prices with fractions of dollars.
+To be more general, I used floats through the analysis, but this led to not matching the output perfectly, since the desired output in "test_1/output/" has no decimals. 
+I have included the option to include either no decimals or two, depending on the desired output, and the option is available when writing out the total drug list.
+It is defined in file 3) below under the function "WriteDrugCountAndTotalList".
 I have written 3 files that are relevant to this problem:
 
 1) run.sh  -  This simply runs the following python script.
