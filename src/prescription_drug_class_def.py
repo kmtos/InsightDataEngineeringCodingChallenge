@@ -144,7 +144,7 @@ class prescription_drug_class(object):
             for row in reversed(self.full_list):  wr.writerow(row)
 
 
-   def WriteDrugCountAndTotalDict(self, outFileName, reverse=False):
+   def WriteDrugCountAndTotalDict(self, outFileName, reverse=False, deimals=False):
       """
       Writes out the drug_totals_dict to a file specified. To loop
       backwards, then enable the boolean option.
@@ -154,13 +154,15 @@ class prescription_drug_class(object):
          wr.writerow(["drug_name","num_prescriber","total_cost"])
          if not reverse:
             for k,v in self.drug_totals_dict.items():          
-               wr.writerow( (str(k.replace("__"," ")), str(v[0]), "{0:.2f}".format(v[1])) )
+               if deimals: wr.writerow( (str(k.replace("__"," ")), v[0], "{0:.2f}".format(v[1])) )
+               else:       wr.writerow( (str(k.replace("__"," ")), v[0], v[1] ) )
          else:
             for k,v in reverse(self.drug_totals_dict.items()): 
-               wr.writerow( (str(k.replace("__"," ")), str(v[0]), "{0:.2f}".format(v[1])) )
+               if deimals: wr.writerow( (str(k.replace("__"," ")), v[0], "{0:.2f}".format(v[1])) )
+               else:       wr.writerow( (str(k.replace("__"," ")), v[0], v[1] ) )
   
 
-   def WriteDrugCountAndTotalList(self, outFileName, reverse=False):
+   def WriteDrugCountAndTotalList(self, outFileName, reverse=False, deimals=False):
       """
       Writes out the drug_totals_list to a file specified. To loop
       backwards, then enable the boolean option.
@@ -170,11 +172,12 @@ class prescription_drug_class(object):
          wr.writerow(["drug_name","num_prescriber","total_cost"])
          if not reverse:
             for row in self.drug_totals_list:
-               wr.writerow( (row[0], row[1], "{0:.2f}".format(row[2])) )
+               if decimals: wr.writerow( (row[0], row[1], "{0:.2f}".format(row[2])) )
+               else:        wr.writerow( (row[0], row[1], row[2]) )
          else:
             for row in reversed(self.drug_totals_list):  
-               rounded = "{0:.2f}".format(row[2])
-               wr.writerow( (row[0], row[1], "{0:.2f}".format(row[2])) )
+               if decimals: wr.writerow( (row[0], row[1], "{0:.2f}".format(row[2])) )
+               else:        wr.writerow( (row[0], row[1], row[2]) )
 
    def ConvertDrugTotalDictToList(self):
       """
