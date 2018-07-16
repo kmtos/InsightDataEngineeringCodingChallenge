@@ -132,6 +132,9 @@ class prescription_drug_class(object):
 
 
    def WriteSortedPersonList(self, outFileName, reverse=False):
+      """
+      Writes out the sorted list of the data provided to a file.
+      """
       with open(outFileName, 'w') as sortedFile:
          wr = csv.writer(sortedFile)
          wr.writerow(["id","prescriber_last_name","prescriber_first_name","drug_name","drug_cost"])
@@ -142,6 +145,10 @@ class prescription_drug_class(object):
 
 
    def WriteDrugCountAndTotalDict(self, outFileName, reverse=False):
+      """
+      Writes out the drug_totals_dict to a file specified. To loop
+      backwards, then enable the boolean option.
+      """
       with open(outFileName, 'w') as sortedFile:
          wr = csv.writer(sortedFile)
          wr.writerow(["drug_name","num_prescriber","total_cost"])
@@ -154,6 +161,10 @@ class prescription_drug_class(object):
   
 
    def WriteDrugCountAndTotalList(self, outFileName, reverse=False):
+      """
+      Writes out the drug_totals_list to a file specified. To loop
+      backwards, then enable the boolean option.
+      """
       with open(outFileName, 'w') as sortedFile:
          wr = csv.writer(sortedFile)
          wr.writerow(["drug_name","num_prescriber","total_cost"])
@@ -166,6 +177,10 @@ class prescription_drug_class(object):
                wr.writerow( (row[0], row[1], "{0:.2f}".format(row[2])) )
 
    def ConvertDrugTotalDictToList(self):
+      """
+      If the drug totals are already in dict form, this function 
+      converts it to a list.
+      """
       self.drug_totals_list = []
       for k,v in self.drug_totals_dict.items():
          self.drug_totals_list.append( (k.replace("__"," "), v[0], v[1]) )
