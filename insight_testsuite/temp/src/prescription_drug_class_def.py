@@ -147,10 +147,10 @@ class prescription_drug_class(object):
          wr.writerow(["drug_name","num_prescriber","total_cost"])
          if not reverse:
             for k,v in self.drug_totals_dict.items():          
-               wr.writerow( (str(k.replace("__"," ")), str(v[0]), str(v[1])) )
+               wr.writerow( (str(k.replace("__"," ")), str(v[0]), "{0:.2f}".format(v[1])) )
          else:
             for k,v in reverse(self.drug_totals_dict.items()): 
-               wr.writerow( (str(k.replace("__"," ")), str(v[0]), str(v[1])) )
+               wr.writerow( (str(k.replace("__"," ")), str(v[0]), "{0:.2f}".format(v[1])) )
   
 
    def WriteDrugCountAndTotalList(self, outFileName, reverse=False):
@@ -158,9 +158,12 @@ class prescription_drug_class(object):
          wr = csv.writer(sortedFile)
          wr.writerow(["drug_name","num_prescriber","total_cost"])
          if not reverse:
-            for row in self.drug_totals_list:  wr.writerow(row)
+            for row in self.drug_totals_list:
+               wr.writerow( (row[0], row[1], "{0:.2f}".format(row[2])) )
          else:
-            for row in reversed(self.drug_totals_list):  wr.writerow(row)
+            for row in reversed(self.drug_totals_list):  
+               rounded = "{0:.2f}".format(row[2])
+               wr.writerow( (row[0], row[1], "{0:.2f}".format(row[2])) )
 
    def ConvertDrugTotalDictToList(self):
       self.drug_totals_list = []

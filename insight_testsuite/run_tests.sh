@@ -83,7 +83,6 @@ function run_all_tests {
   PASS_CNT=0
 
   # Loop through all tests
-  echo "TEST_FOLDERS=$TEST_FOLDERS"
   for test_folder in ${TEST_FOLDERS}; do
 
     setup_testing_input_output
